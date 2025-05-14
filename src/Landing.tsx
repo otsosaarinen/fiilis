@@ -1,6 +1,6 @@
-import "./App.css";
+import "./Globals.css";
 
-function App() {
+function Landing() {
 	return (
 		<>
 			<div className="font-jost text-purple-600">
@@ -10,4 +10,4 @@ function App() {
 	);
 }
 
-export default App;
+export default Landing;
