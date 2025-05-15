@@ -1,13 +1,22 @@
 import "./Globals.css";
+import { Link } from "react-router";
 
 function Landing() {
 	return (
 		<>
-			<div className="font-jost bg-ghost-white flex min-h-screen max-w-screen flex-col items-center gap-12 py-20 text-neutral-800">
+			<div className="font-jost bg-ghost-white flex min-h-screen max-w-screen flex-col items-center gap-12 py-25 text-neutral-800">
+				<div className="bg-tropical-indigo absolute top-0 flex w-full flex-row items-center justify-end gap-5 p-3 font-semibold text-white">
+					<div className="hover:underline">
+						<Link to="/login">Login</Link>
+					</div>
+					<div className="mr-5 hover:underline">
+						<Link to="/signup">Sign up</Link>
+					</div>
+				</div>
 				<h1 className="text-tropical-indigo text-9xl font-semibold">
 					Fiilis
 				</h1>
-				<h2 className="max-w-175 text-center text-2xl">
+				<h2 className="w-100 text-center text-2xl md:w-175">
 					Track your physical and mental wellbeing with Fiilis. <br />
 					Gain insights into your daily habits and improve your
 					overall wellbeing.
@@ -15,7 +24,7 @@ function Landing() {
 				<section className="flex flex-col items-center justify-center gap-5 text-5xl font-medium">
 					<div className="text-center">Membership types</div>
 					<div className="grid w-80 grid-cols-1 gap-5 lg:w-200 lg:grid-cols-2">
-						<div>
+						<div className="rounded-xl shadow-md shadow-neutral-800/20">
 							<div className="bg-periwinkle flex items-center justify-center rounded-t-xl p-1 text-lg">
 								Most popular subscription
 							</div>
@@ -30,7 +39,7 @@ function Landing() {
 								<p className="text-4xl">Free</p>
 							</div>
 						</div>
-						<div>
+						<div className="rounded-xl shadow-md shadow-neutral-800/20">
 							<div className="bg-periwinkle flex items-center justify-center rounded-t-xl p-1 text-lg">
 								Premium membership
 							</div>
@@ -47,6 +56,12 @@ function Landing() {
 						</div>
 					</div>
 				</section>
+				<div className="text-2xl">
+					<span className="text-tropical-indigo font-semibold hover:underline">
+						<Link to="/signup">Sign up</Link>
+					</span>{" "}
+					now and take control of your wellbeing.
+				</div>
 			</div>
 		</>
 	);
