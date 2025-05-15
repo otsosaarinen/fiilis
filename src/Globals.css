@@ -3,4 +3,10 @@
 
 @theme {
 	--font-jost: "Jost", sans-serif;
+
+	--color-tropical-indigo: #9381ff;
+	--color-periwinkle: #b8b8ff;
+	--color-ghost-white: #f8f7ff;
+	--color-antique-white: #ffeedd;
+	--color-apricot: #ffd8be;
 }
