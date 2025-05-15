@@ -15,6 +15,9 @@ function Header() {
 				</div>
 				<div className="mr-5 flex flex-row gap-5">
 					<div className="hover:underline">
+						<Link to="/">Home</Link>
+					</div>
+					<div className="hover:underline">
 						<Link to="/login">Login</Link>
 					</div>
 					<div className="hover:underline">
