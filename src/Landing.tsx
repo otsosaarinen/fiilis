@@ -115,7 +115,7 @@ function Landing() {
 						<span className="text-tropical-indigo font-semibold">
 							80%
 						</span>{" "}
-						of our customers recommend us
+						of our users recommend us
 					</div>
 				</section>
 				<section className="text-center text-2xl">
