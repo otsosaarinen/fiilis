@@ -1,29 +1,13 @@
 import "./Globals.css";
+import Header from "./Header";
 import { Link } from "react-router";
-import { Github, Moon, Sun, CircleCheck, Star } from "lucide-react";
+import { CircleCheck, Star } from "lucide-react";
 
 function Landing() {
 	return (
 		<>
 			<div className="font-jost bg-ghost-white flex min-h-screen max-w-screen flex-col items-center gap-12 py-25 text-neutral-800">
-				<div className="bg-tropical-indigo fixed top-0 flex w-full flex-row items-center justify-between p-4 font-semibold text-white">
-					<div className="ml-5 flex flex-row gap-5">
-						<Link to="https://github.com/otsosaarinen/fiilis">
-							<Github />
-						</Link>
-						<div className="hover:cursor-pointer">
-							<Moon />
-						</div>
-					</div>
-					<div className="mr-5 flex flex-row gap-5">
-						<div className="hover:underline">
-							<Link to="/login">Login</Link>
-						</div>
-						<div className="hover:underline">
-							<Link to="/signup">Sign up</Link>
-						</div>
-					</div>
-				</div>
+				<Header />
 				<h1 className="text-tropical-indigo text-9xl font-semibold">
 					Fiilis
 				</h1>
