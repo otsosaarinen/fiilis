@@ -1,16 +1,24 @@
 import "./Globals.css";
 import { Link } from "react-router";
+import { Github } from "lucide-react";
 
 function Landing() {
 	return (
 		<>
 			<div className="font-jost bg-ghost-white flex min-h-screen max-w-screen flex-col items-center gap-12 py-25 text-neutral-800">
-				<div className="bg-tropical-indigo absolute top-0 flex w-full flex-row items-center justify-end gap-5 p-3 font-semibold text-white">
-					<div className="hover:underline">
-						<Link to="/login">Login</Link>
+				<div className="bg-tropical-indigo absolute top-0 flex w-full flex-row items-center justify-between p-3 font-semibold text-white">
+					<div className="ml-5">
+						<Link to="https://github.com/otsosaarinen/fiilis">
+							<Github />
+						</Link>
 					</div>
-					<div className="mr-5 hover:underline">
-						<Link to="/signup">Sign up</Link>
+					<div className="mr-5 flex flex-row gap-5">
+						<div className="hover:underline">
+							<Link to="/login">Login</Link>
+						</div>
+						<div className="hover:underline">
+							<Link to="/signup">Sign up</Link>
+						</div>
 					</div>
 				</div>
 				<h1 className="text-tropical-indigo text-9xl font-semibold">
