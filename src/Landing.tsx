@@ -1,12 +1,12 @@
 import "./Globals.css";
 import Header from "./Header";
 import { Link } from "react-router";
-import { CircleCheck, Star } from "lucide-react";
+import { CircleCheck, Star, Linkedin, Mail } from "lucide-react";
 
 function Landing() {
 	return (
 		<>
-			<div className="font-jost bg-ghost-white flex min-h-screen max-w-screen flex-col items-center gap-12 py-25 text-neutral-800">
+			<div className="font-jost bg-ghost-white flex min-h-screen max-w-screen flex-col items-center gap-12 pt-25 text-neutral-800">
 				<Header />
 				<h1 className="text-tropical-indigo text-9xl font-semibold">
 					Fiilis
@@ -108,6 +108,24 @@ function Landing() {
 					</span>{" "}
 					now and take control of your wellbeing.
 				</section>
+				<div className="flex w-full flex-col items-center justify-center gap-5 bg-neutral-700 p-8 text-lg text-white">
+					<div className="w-100 text-center md:w-175">
+						This website was developed by Otso Saarinen as a
+						practice project. Using the website is completely free
+						and no real subscription payments exist.
+					</div>
+					<div className="flex flex-col items-center justify-center gap-2">
+						Contact me{" "}
+						<div className="flex flex-row gap-3 hover:cursor-pointer">
+							<Link to="https://www.linkedin.com/in/otsosaarinen/">
+								<Linkedin />
+							</Link>
+							<a href="mailto:saarinenotso@gmail.com">
+								<Mail />
+							</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</>
 	);
