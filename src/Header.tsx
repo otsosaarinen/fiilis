@@ -1,7 +1,17 @@
 import { Link } from "react-router";
-import { Github, Moon } from "lucide-react";
+import { Github, Moon, Sun } from "lucide-react";
+import { useState } from "react";
 
 function Header() {
+	const [lightTheme, setLightTheme] = useState(true);
+
+	const changeTheme = () => {
+		if (lightTheme == true) {
+			setLightTheme(false);
+		} else {
+			setLightTheme(true);
+		}
+	};
 	return (
 		<>
 			<div className="bg-tropical-indigo fixed top-0 flex w-full flex-row items-center justify-between p-4 font-semibold text-white">
@@ -9,8 +19,8 @@ function Header() {
 					<Link to="https://github.com/otsosaarinen/fiilis">
 						<Github />
 					</Link>
-					<div className="hover:cursor-pointer">
-						<Moon />
+					<div className="hover:cursor-pointer" onClick={changeTheme}>
+						{lightTheme ? <Moon /> : <Sun />}
 					</div>
 				</div>
 				<div className="mr-5 flex flex-row gap-5">
