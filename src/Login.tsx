@@ -14,7 +14,7 @@ function Login() {
 		email: "",
 		password: "",
 	});
-	const [loginButtonDisabled, setloginButtonDisabled] =
+	const [loginButtonDisabled, setLoginButtonDisabled] =
 		useState<boolean>(true);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,9 +31,9 @@ function Login() {
 			formData.email.trim().length > 0 &&
 			formData.password.trim().length > 0
 		) {
-			setloginButtonDisabled(false);
+			setLoginButtonDisabled(false);
 		} else {
-			setloginButtonDisabled(true);
+			setLoginButtonDisabled(true);
 		}
 	}, [formData]);
 
