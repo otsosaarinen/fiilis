@@ -2,7 +2,7 @@ import Header from "./Header";
 import TextField from "@mui/material/TextField";
 import FiilisButton from "./components/FiilisButton";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface FormType {
 	email: string;
@@ -14,7 +14,8 @@ function Login() {
 		email: "",
 		password: "",
 	});
-	const [loginButtonStatus, setLoginButtonStatus] = useState<boolean>(true);
+	const [loginButtonDisabled, setloginButtonDisabled] =
+		useState<boolean>(true);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -22,10 +23,19 @@ function Login() {
 			...prevData,
 			[name]: value,
 		}));
-		if (formData.email && formData.password) {
-			setLoginButtonStatus(false);
-		}
 	};
+
+	// runs when formData updates and checks if both fields have text inside them
+	useEffect(() => {
+		if (
+			formData.email.trim().length > 0 &&
+			formData.password.trim().length > 0
+		) {
+			setloginButtonDisabled(false);
+		} else {
+			setloginButtonDisabled(true);
+		}
+	}, [formData]);
 
 	const formSubmit = () => {
 		console.log(formData);
@@ -55,7 +65,8 @@ function Login() {
 						/>
 						<FiilisButton
 							variant="contained"
-							disabled={loginButtonStatus}
+							disabled={loginButtonDisabled}
+							loading={false}
 							onClick={formSubmit}
 						>
 							Login
