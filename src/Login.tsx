@@ -1,14 +1,35 @@
 import Header from "./Header";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import type { ButtonProps } from "@mui/material/Button";
-import { styled } from "@mui/material";
+import FiilisButton from "./components/FiilisButton";
+
+import { useState } from "react";
+
+interface FormType {
+	email: string;
+	password: string;
+}
 
 function Login() {
-	const FiilisButton = styled(Button)<ButtonProps>(() => ({
-		color: "white",
-		backgroundColor: "#9381ff",
-	}));
+	const [formData, setFormData] = useState<FormType>({
+		email: "",
+		password: "",
+	});
+	const [loginButtonStatus, setLoginButtonStatus] = useState<boolean>(true);
+
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setFormData((prevData) => ({
+			...prevData,
+			[name]: value,
+		}));
+		if (formData.email && formData.password) {
+			setLoginButtonStatus(false);
+		}
+	};
+
+	const formSubmit = () => {
+		console.log(formData);
+	};
 
 	return (
 		<>
@@ -19,9 +40,26 @@ function Login() {
 						Welcome to Fiilis
 					</div>
 					<div className="flex flex-col items-center justify-center gap-5 p-5">
-						<TextField label="Email address" />
-						<TextField label="Password" />
-						<FiilisButton variant="contained">Login</FiilisButton>
+						<TextField
+							label="Email"
+							name="email"
+							value={formData.email}
+							onChange={handleChange}
+						/>
+						<TextField
+							label="Password"
+							type="password"
+							name="password"
+							value={formData.password}
+							onChange={handleChange}
+						/>
+						<FiilisButton
+							variant="contained"
+							disabled={loginButtonStatus}
+							onClick={formSubmit}
+						>
+							Login
+						</FiilisButton>
 					</div>
 				</div>
 			</div>
