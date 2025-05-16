@@ -17,7 +17,7 @@ function Login() {
 	const [loginButtonDisabled, setloginButtonDisabled] =
 		useState<boolean>(true);
 
-	const handleChange = (e) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
 			...prevData,
