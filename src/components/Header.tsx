@@ -4,8 +4,11 @@ import { useState, useEffect } from "react";
 
 function Header() {
 	const [lightTheme, setLightTheme] = useState(true);
+	const [authStatus, setAuthStatus] = useState(false);
 
 	useEffect(() => {
+		const currentAuthStatus = localStorage.getItem("authStatus");
+
 		const currentTheme = localStorage.getItem("theme");
 		if (currentTheme == "dark") {
 			setLightTheme(false);
@@ -38,11 +41,28 @@ function Header() {
 						<Link to="/">Home</Link>
 					</div>
 					<div className="hover:underline">
-						<Link to="/login">Login</Link>
+						<Link to="/dashboard">Dashboard</Link>
 					</div>
-					<div className="hover:underline">
-						<Link to="/signup">Sign up</Link>
-					</div>
+					{authStatus ? (
+						""
+					) : (
+						<>
+							<div className="hover:underline">
+								<Link to="/login">Login</Link>
+							</div>
+							<div className="hover:underline">
+								<Link to="/signup">Sign up</Link>
+							</div>
+						</>
+					)}
+
+					{authStatus ? (
+						<div className="hover:cursor-pointer hover:underline">
+							Log Out
+						</div>
+					) : (
+						""
+					)}
 				</div>
 			</div>
 		</>
