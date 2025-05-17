@@ -1,5 +1,5 @@
-import "./Globals.css";
-import Header from "./Header";
+import "../Globals.css";
+import Header from "../components/Header";
 import { Link } from "react-router";
 import { CircleCheck, Star, Linkedin, Mail } from "lucide-react";
 

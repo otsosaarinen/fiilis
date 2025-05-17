@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router";
-import Landing from "./Landing.tsx";
-import Login from "./Login.tsx";
-import Signup from "./Signup.tsx";
+import Landing from "./pages/Landing.tsx";
+import Login from "./pages/Login.tsx";
+import Signup from "./pages/Signup.tsx";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
