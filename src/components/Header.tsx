@@ -1,17 +1,27 @@
 import { Link } from "react-router";
 import { Github, Moon, Sun } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Header() {
 	const [lightTheme, setLightTheme] = useState(true);
 
+	useEffect(() => {
+		const currentTheme = localStorage.getItem("theme");
+		if (currentTheme == "dark") {
+			setLightTheme(false);
+		}
+	}, []);
+
 	const changeTheme = () => {
 		if (lightTheme == true) {
 			setLightTheme(false);
+			localStorage.setItem("theme", "dark");
 		} else {
 			setLightTheme(true);
+			localStorage.setItem("theme", "light");
 		}
 	};
+
 	return (
 		<>
 			<div className="bg-tropical-indigo fixed top-0 flex w-full flex-row items-center justify-between p-4 font-semibold text-white">
