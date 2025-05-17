@@ -3,8 +3,17 @@ import { PrismaClient } from "./generated/prisma";
 const prisma = new PrismaClient();
 
 async function main() {
-	const allUsers = await prisma.user.findMany();
-	console.log(allUsers);
+	const user = await prisma.user.create({
+		data: {
+			firstName: "Otso",
+			lastName: "Saarinen",
+			email: "saarinenotso@gmail.com",
+			passwordHash: "123321abccba",
+			createdAt: new Date(),
+			subscription: "Premium",
+		},
+	});
+	console.log(user);
 }
 
 main()
