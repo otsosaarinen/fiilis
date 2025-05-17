@@ -8,6 +8,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model test {
+enum SubscriptionType {
+  Basic
+  Premium
+}
+
+model User {
   id Int @id @default(autoincrement())
+  firstName String @db.VarChar(255)
+  lastName String @db.VarChar(255)
+  email String @unique @db.VarChar(255)
+  passwordHash String @db.VarChar(255)
+  createdAt DateTime @default(now())
+  subscription SubscriptionType @default(Basic)
 }
