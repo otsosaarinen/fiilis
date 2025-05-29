@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import TextField from "@mui/material/TextField";
 import FiilisButton from "../components/FiilisButton";
 import MenuItem from "@mui/material/MenuItem";
-
+import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 
 interface FormType {
@@ -14,12 +14,14 @@ interface FormType {
 }
 
 function Signup() {
+	let navigate = useNavigate();
+
 	const [formData, setFormData] = useState<FormType>({
 		firstName: "",
 		lastName: "",
 		email: "",
 		password: "",
-		subscriptionType: "Free",
+		subscriptionType: "Basic",
 	});
 
 	const [signupButtonDisabled, setSignupButtonDisabled] =
@@ -48,14 +50,33 @@ function Signup() {
 		}
 	}, [formData]);
 
-	const formSubmit = () => {
-		console.log(formData);
+	const formSubmit = async () => {
+		try {
+			const response = await fetch("http://localhost:3000/api/user", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					firstName: formData.firstName,
+					lastName: formData.lastName,
+					email: formData.email,
+					password: formData.password,
+					createdAt: new Date(),
+					subscription: formData.subscriptionType,
+				}),
+			});
+			// redirects user to dashboard if user was succesfully created
+			if (response.ok) {
+				navigate("/dashboard");
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const subscriptions = [
 		{
-			value: "Free",
-			label: "Free",
+			value: "Basic",
+			label: "Basic",
 		},
 		{ value: "Fiilis+", label: "Fiilis+" },
 	];
