@@ -8,7 +8,6 @@ function Header() {
 
 	useEffect(() => {
 		const currentAuthStatus = localStorage.getItem("authStatus");
-
 		const currentTheme = localStorage.getItem("theme");
 
 		if (!currentTheme) {
