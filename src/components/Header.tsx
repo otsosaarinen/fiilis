@@ -10,8 +10,9 @@ function Header() {
 		const currentAuthStatus = localStorage.getItem("authStatus");
 
 		const currentTheme = localStorage.getItem("theme");
-		if (currentTheme == "dark") {
-			setLightTheme(false);
+
+		if (!currentTheme) {
+			localStorage.setItem("theme", "light");
 		}
 	}, []);
 
