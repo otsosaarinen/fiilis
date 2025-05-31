@@ -43,9 +43,6 @@ router.post("/", async (req, res): Promise<void> => {
 				expiresIn: JWT_EXPIRES_IN || "24h",
 			});
 
-			console.log(token);
-
-			console.log("User authenticated successfully");
 			res.status(200).json({
 				message: "User authenticated successfully",
 				token,
