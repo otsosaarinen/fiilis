@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import TextField from "@mui/material/TextField";
 import FiilisButton from "../components/FiilisButton";
+import { useNavigate } from "react-router";
 
 import { useState, useEffect } from "react";
 
@@ -10,6 +11,8 @@ interface FormType {
 }
 
 function Login() {
+	let navigate = useNavigate();
+
 	const [formData, setFormData] = useState<FormType>({
 		email: "",
 		password: "",
@@ -37,8 +40,28 @@ function Login() {
 		}
 	}, [formData]);
 
-	const formSubmit = () => {
-		console.log(formData);
+	const formSubmit = async () => {
+		try {
+			const response = await fetch("http://localhost:3000/api/auth", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					email: formData.email,
+					password: formData.password,
+				}),
+			});
+			// redirects user to dashboard if login was succesfull
+			if (response.ok) {
+				navigate("/dashboard", {
+					state: {
+						snackbarVisible: true,
+						snackbarMessage: "Login succesful",
+					},
+				});
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
