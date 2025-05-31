@@ -1,11 +1,28 @@
-import { useState } from "react";
-import { Outlet } from "react-router";
-import { Snackbar, SnackbarContent } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Outlet, useLocation } from "react-router";
+import { Snackbar } from "@mui/material";
 import { Alert } from "@mui/material";
 import type { SnackbarCloseReason } from "@mui/material";
 
 function Layout() {
+	let location = useLocation();
 	const [snackbarVisible, setSnackbarVisible] = useState(false);
+	const [snackbarMessage, setSnackbarMessage] = useState("");
+
+	useEffect(() => {
+		console.log(location);
+
+		if (
+			location.state?.snackbarVisible &&
+			location.state?.snackbarMessage
+		) {
+			setSnackbarVisible(true);
+			setSnackbarMessage(location.state.snackbarMessage);
+
+			// Clear state so it doesn't repeat on refresh
+			window.history.replaceState({}, "");
+		}
+	}, [location.key]);
 
 	const handleClose = (
 		event: React.SyntheticEvent | Event,
@@ -30,7 +47,7 @@ function Layout() {
 					severity="success"
 					variant="filled"
 				>
-					Account succesfully created
+					{snackbarMessage}
 				</Alert>
 			</Snackbar>
 			<Outlet />
