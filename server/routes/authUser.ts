@@ -35,11 +35,10 @@ router.post("/", async (req, res): Promise<void> => {
 
 			// create constants from environmental variables
 			const JWT_SECRET = process.env.JWT_SECRET as string;
-			const JWT_EXPIRES_IN = process.env
-				.JWT_EXPIRES_IN as unknown as number;
+			const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN;
 
 			const token = jwt.sign(payload, JWT_SECRET, {
-				expiresIn: JWT_EXPIRES_IN || "24h",
+				expiresIn: Number(JWT_EXPIRES_IN) || "24h",
 			});
 
 			res.cookie("token", token, {
