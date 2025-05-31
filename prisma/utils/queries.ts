@@ -1,12 +1,6 @@
 import { prisma } from "./prisma";
 import { SubscriptionType } from "../../generated/prisma";
 
-// function for fetching all users from the database
-export const findAllUsers = async () => {
-	const users = await prisma.user.findMany();
-	console.log(users);
-};
-
 // type and function for creating a new user
 type userObject = {
 	firstName: string;
