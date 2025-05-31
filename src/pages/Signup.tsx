@@ -60,7 +60,6 @@ function Signup() {
 					lastName: formData.lastName,
 					email: formData.email,
 					password: formData.password,
-					createdAt: new Date(),
 					subscription: formData.subscriptionType,
 				}),
 			});
