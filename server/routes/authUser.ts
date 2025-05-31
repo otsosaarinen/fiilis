@@ -1,9 +1,13 @@
 import bcrypt from "bcryptjs";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 
 import { Router } from "express";
 import { authenticateUser } from "../../prisma/utils/queries";
 
 const router = Router();
+
+dotenv.config();
 
 router.post("/", async (req, res): Promise<void> => {
 	try {
@@ -23,15 +27,29 @@ router.post("/", async (req, res): Promise<void> => {
 		const authStatus = await bcrypt.compare(password, passwordHash);
 
 		if (authStatus) {
+			const payload = {
+				id: response.id,
+				firstName: response.firstName,
+				lastName: response.lastName,
+				email: response.email,
+			};
+
+			// create constants from environmental variables
+			const JWT_SECRET = process.env.JWT_SECRET as string;
+			const JWT_EXPIRES_IN = process.env
+				.JWT_EXPIRES_IN as unknown as number;
+
+			const token = jwt.sign(payload, JWT_SECRET, {
+				expiresIn: JWT_EXPIRES_IN || "24h",
+			});
+
+			console.log(token);
+
 			console.log("User authenticated successfully");
 			res.status(200).json({
 				message: "User authenticated successfully",
-				user: {
-					id: response.id,
-					firstName: response.firstName,
-					lastName: response.lastName,
-					email: response.email,
-				},
+				token,
+				user: payload,
 			});
 		} else {
 			res.status(401).json({ message: "Incorrect password" });
