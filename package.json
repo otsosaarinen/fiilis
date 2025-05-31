@@ -9,7 +9,7 @@
 		"lint": "eslint .",
 		"preview": "vite preview",
 		"test": "jest",
-		"server": ""
+		"server": "npx tsx server/server.ts"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.14.0",
