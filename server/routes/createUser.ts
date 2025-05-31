@@ -34,9 +34,7 @@ router.post("/", async (req, res) => {
 
 		if (response) {
 			const payload = {
-				firstName: response.firstName,
-				lastName: response.lastName,
-				email: response.email,
+				id: response.id,
 			};
 
 			// create constants from environmental variables
