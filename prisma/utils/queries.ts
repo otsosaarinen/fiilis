@@ -34,6 +34,7 @@ export const authenticateUser = async (authData: userCredentialsObjects) => {
 	return user;
 };
 
+// function for fetching user with specific id
 export const getUserById = async (userId: number) => {
 	const user = await prisma.user.findUnique({ where: { id: userId } });
 	return user;
