@@ -20,16 +20,16 @@ router.post("/", async (req, res): Promise<void> => {
 
 		const passwordHash = response?.passwordHash as string;
 
-		bcrypt.compare(password, passwordHash, (err, result) => {
-			if (err || !result) {
-				return res.status(401).json({ message: "Incorrect password" });
-			}
+		const authStatus = await bcrypt.compare(password, passwordHash);
 
+		if (authStatus) {
 			console.log("User authenticated successfully");
-			return res.status(200).json({
+			res.status(200).json({
 				message: "User authenticated successfully",
 			});
-		});
+		} else {
+			res.status(401).json({ message: "Incorrect password" });
+		}
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ message: "Error while logging in" });
