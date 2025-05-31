@@ -5,13 +5,12 @@ export const authMiddleware = (
 	req: Request,
 	res: Response,
 	next: NextFunction,
-) => {
+): void => {
 	const token = req.cookies.token;
 
 	if (!token) {
-		return res
-			.status(401)
-			.json({ message: "Authentication token missing" });
+		res.status(401).json({ message: "Authentication token missing" });
+		return;
 	}
 
 	try {
@@ -22,6 +21,7 @@ export const authMiddleware = (
 
 		next();
 	} catch (error) {
-		return res.status(401).json({ message: "Invalid or expired token" });
+		res.status(401).json({ message: "Invalid or expired token" });
+		return;
 	}
 };
