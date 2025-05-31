@@ -1,4 +1,6 @@
 import bcrypt from "bcryptjs";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 
 import { Router } from "express";
 import { createUser } from "../../prisma/utils/queries";
@@ -6,12 +8,14 @@ import { SubscriptionType } from "../../generated/prisma";
 
 const router = Router();
 
+dotenv.config();
+
 router.post("/", async (req, res) => {
 	const firstName = req.body.firstName;
 	const lastName = req.body.lastName;
 	const email = req.body.email;
 	const password = req.body.password;
-	const createdAt = req.body.createdAt;
+	const createdAt = new Date();
 	const subscription = req.body.subscription as SubscriptionType;
 
 	const salt = await bcrypt.genSalt(10);
@@ -26,8 +30,36 @@ router.post("/", async (req, res) => {
 			createdAt: createdAt,
 			subscription: subscription,
 		};
-		await createUser(data);
-		res.status(200).json({ message: "User created succesfully" });
+		const response = await createUser(data);
+
+		if (response) {
+			const payload = {
+				firstName: response.firstName,
+				lastName: response.lastName,
+				email: response.email,
+			};
+
+			// create constants from environmental variables
+			const JWT_SECRET = process.env.JWT_SECRET as string;
+			const JWT_EXPIRES_IN = process.env
+				.JWT_EXPIRES_IN as unknown as number;
+
+			const token = jwt.sign(payload, JWT_SECRET, {
+				expiresIn: JWT_EXPIRES_IN || "24h",
+			});
+
+			res.cookie("token", token, {
+				httpOnly: true,
+				sameSite: "strict",
+				maxAge: 24 * 60 * 60 * 1000,
+			})
+				.status(200)
+				.json({
+					message: "User created succesfully",
+					token,
+					user: payload,
+				});
+		}
 	} catch (error) {
 		res.status(500).json({ message: "Error while creating an user" });
 		console.log(error);
