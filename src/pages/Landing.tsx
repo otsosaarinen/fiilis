@@ -57,7 +57,7 @@ function Landing() {
 								Premium membership
 							</div>
 							<div className="flex flex-col items-center justify-center gap-2 rounded-b-xl p-5">
-								<p className="text-4xl">Fiilis+</p>
+								<p className="text-4xl">Premium</p>
 								<p className="text-tropical-indigo text-xl">
 									Advanced features
 								</p>
