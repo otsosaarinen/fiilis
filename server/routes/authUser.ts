@@ -26,6 +26,12 @@ router.post("/", async (req, res): Promise<void> => {
 			console.log("User authenticated successfully");
 			res.status(200).json({
 				message: "User authenticated successfully",
+				user: {
+					id: response.id,
+					firstName: response.firstName,
+					lastName: response.lastName,
+					email: response.email,
+				},
 			});
 		} else {
 			res.status(401).json({ message: "Incorrect password" });
