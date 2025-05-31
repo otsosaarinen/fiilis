@@ -43,11 +43,17 @@ router.post("/", async (req, res): Promise<void> => {
 				expiresIn: JWT_EXPIRES_IN || "24h",
 			});
 
-			res.status(200).json({
-				message: "User authenticated successfully",
-				token,
-				user: payload,
-			});
+			res.cookie("token", token, {
+				httpOnly: true,
+				sameSite: "strict",
+				maxAge: 24 * 60 * 60 * 1000,
+			})
+				.status(200)
+				.json({
+					message: "User authenticated successfully",
+					token,
+					user: payload,
+				});
 		} else {
 			res.status(401).json({ message: "Incorrect password" });
 		}
