@@ -10,8 +10,6 @@ function Layout() {
 	const [snackbarMessage, setSnackbarMessage] = useState("");
 
 	useEffect(() => {
-		console.log(location);
-
 		if (
 			location.state?.snackbarVisible &&
 			location.state?.snackbarMessage
