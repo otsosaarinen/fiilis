@@ -28,7 +28,6 @@ router.post("/", async (req, res): Promise<void> => {
 
 		if (authStatus) {
 			const payload = {
-				id: response.id,
 				firstName: response.firstName,
 				lastName: response.lastName,
 				email: response.email,
