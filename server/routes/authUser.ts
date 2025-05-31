@@ -22,7 +22,6 @@ router.post("/", async (req, res): Promise<void> => {
 
 		bcrypt.compare(password, passwordHash, (err, result) => {
 			if (err || !result) {
-				console.log("Incorrect password");
 				return res.status(401).json({ message: "Incorrect password" });
 			}
 
