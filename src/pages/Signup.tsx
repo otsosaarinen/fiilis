@@ -78,7 +78,7 @@ function Signup() {
 			value: "Basic",
 			label: "Basic",
 		},
-		{ value: "Fiilis+", label: "Fiilis+" },
+		{ value: "Premium", label: "Premium" },
 	];
 
 	return (
