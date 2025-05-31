@@ -5,11 +5,7 @@ import { Alert } from "@mui/material";
 import type { SnackbarCloseReason } from "@mui/material";
 
 function Layout() {
-	const [userCreatedSnackbar, setUserCreatedSnackbar] = useState(false);
-
-	const handleClick = () => {
-		setUserCreatedSnackbar(true);
-	};
+	const [snackbarVisible, setSnackbarVisible] = useState(false);
 
 	const handleClose = (
 		event: React.SyntheticEvent | Event,
@@ -18,13 +14,13 @@ function Layout() {
 		if (reason === "clickaway") {
 			return;
 		}
-		setUserCreatedSnackbar(false);
+		setSnackbarVisible(false);
 	};
 
 	return (
 		<>
 			<Snackbar
-				open={userCreatedSnackbar}
+				open={snackbarVisible}
 				autoHideDuration={5000}
 				onClose={handleClose}
 				anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
