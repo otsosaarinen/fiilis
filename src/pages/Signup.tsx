@@ -66,7 +66,12 @@ function Signup() {
 			});
 			// redirects user to dashboard if user was succesfully created
 			if (response.ok) {
-				navigate("/dashboard");
+				navigate("/dashboard", {
+					state: {
+						snackbarVisible: true,
+						snackbarMessage: "Account created succesfully",
+					},
+				});
 			}
 		} catch (error) {
 			console.log(error);
