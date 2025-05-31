@@ -1,11 +1,13 @@
 import { prisma } from "./prisma";
 import { SubscriptionType } from "../../generated/prisma";
 
+// function for fetching all users from the database
 export const findAllUsers = async () => {
 	const users = await prisma.user.findMany();
 	console.log(users);
 };
 
+// type and function for creating a new user
 type userObject = {
 	firstName: string;
 	lastName: string;
@@ -17,5 +19,17 @@ type userObject = {
 
 export const createUser = async (userData: userObject) => {
 	const user = await prisma.user.create({ data: userData });
-	console.log(user);
+	return user;
+};
+
+// type and function for fetching user's password hash from the database
+type userCredentialsObjects = {
+	email: string;
+};
+
+export const authenticateUser = async (authData: userCredentialsObjects) => {
+	const user = await prisma.user.findUnique({
+		where: { email: authData.email },
+	});
+	return user;
 };
