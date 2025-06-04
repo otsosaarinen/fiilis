@@ -42,15 +42,18 @@ function Login() {
 
 	const formSubmit = async () => {
 		try {
-			const response = await fetch("http://localhost:3000/api/auth", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				credentials: "include",
-				body: JSON.stringify({
-					email: formData.email,
-					password: formData.password,
-				}),
-			});
+			const response = await fetch(
+				"http://localhost:3000/api/user/auth",
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					credentials: "include",
+					body: JSON.stringify({
+						email: formData.email,
+						password: formData.password,
+					}),
+				},
+			);
 			// redirects user to dashboard if login was succesfull
 			if (response.ok) {
 				navigate("/dashboard", {
