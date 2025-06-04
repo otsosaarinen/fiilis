@@ -7,7 +7,12 @@ router.get("/", authMiddleware, async (req, res) => {
 	try {
 		res.status(200).json({
 			message: "succesful",
-			user: { firstName: "test", lastName: "test2" },
+			user: {
+				firstName: "",
+				lastName: "",
+				email: "",
+				subscription: "",
+			},
 		});
 		return;
 	} catch (error) {
