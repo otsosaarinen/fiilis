@@ -3,13 +3,13 @@ import { Github, Moon, Sun } from "lucide-react";
 import { useState, useEffect } from "react";
 
 function Header() {
-	const [lightTheme, setLightTheme] = useState(true);
+	const [lightTheme, setLightTheme] = useState<boolean>(true);
 	const [authStatus, setAuthStatus] = useState(false);
 
 	useEffect(() => {
 		const currentTheme = localStorage.getItem("theme");
 
-		if (!currentTheme) {
+		if (currentTheme == "light" || currentTheme == null) {
 			localStorage.setItem("theme", "light");
 		}
 	}, []);
@@ -39,9 +39,7 @@ function Header() {
 					<div className="hover:underline">
 						<Link to="/">Home</Link>
 					</div>
-					<div className="hover:underline">
-						<Link to="/dashboard">Dashboard</Link>
-					</div>
+
 					{authStatus ? (
 						""
 					) : (
@@ -56,9 +54,14 @@ function Header() {
 					)}
 
 					{authStatus ? (
-						<div className="hover:cursor-pointer hover:underline">
-							Log Out
-						</div>
+						<>
+							<div className="hover:underline">
+								<Link to="/dashboard">Dashboard</Link>
+							</div>
+							<div className="hover:cursor-pointer hover:underline">
+								Log Out
+							</div>
+						</>
 					) : (
 						""
 					)}
