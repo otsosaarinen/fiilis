@@ -56,7 +56,16 @@ function Login() {
 				navigate("/dashboard", {
 					state: {
 						snackbarVisible: true,
+						snackbarSeverity: "success",
 						snackbarMessage: "Login succesful",
+					},
+				});
+			} else {
+				navigate("/login", {
+					state: {
+						snackbarVisible: true,
+						snackbarSeverity: "error",
+						snackbarMessage: "Incorrect email or password",
 					},
 				});
 			}

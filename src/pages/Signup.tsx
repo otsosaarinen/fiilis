@@ -71,6 +71,14 @@ function Signup() {
 						snackbarMessage: "Account created succesfully",
 					},
 				});
+			} else {
+				navigate("/signup", {
+					state: {
+						snackbarVisible: true,
+						snackbarSeverity: "error",
+						snackbarMessage: "Failed to sign up",
+					},
+				});
 			}
 		} catch (error) {
 			console.log(error);
