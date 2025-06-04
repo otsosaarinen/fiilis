@@ -57,6 +57,7 @@ function Signup() {
 				{
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
+					credentials: "include",
 					body: JSON.stringify({
 						firstName: formData.firstName,
 						lastName: formData.lastName,
