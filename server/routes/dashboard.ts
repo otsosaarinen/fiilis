@@ -5,7 +5,10 @@ const router = Router();
 
 router.get("/", authMiddleware, async (req, res) => {
 	try {
-		res.status(200).json({ message: "succesful" });
+		res.status(200).json({
+			message: "succesful",
+			user: { firstName: "test", lastName: "test2" },
+		});
 		return;
 	} catch (error) {
 		console.log(error);
