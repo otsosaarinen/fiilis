@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header";
 
 function Dashboard() {
-	const [authStatus, setAuthStatus] = useState<boolean>(true);
+	const [authStatus, setAuthStatus] = useState<boolean>(false);
 	const [userInformation, setUserInformation] = useState({
 		firstName: null,
 		lastName: null,
@@ -17,15 +17,27 @@ function Dashboard() {
 					"http://localhost:3000/api/dashboard",
 					{
 						method: "GET",
+						credentials: "include",
 					},
 				);
+
 				if (response.ok) {
-					console.log(response);
+					const data = await response.json();
+					console.log(data.user);
+
+					setUserInformation({
+						firstName: data.user.firstName,
+						lastName: data.user.lastName,
+						email: data.user.email,
+						subscription: data.user.subscription,
+					});
+					setAuthStatus(true);
 				}
 			} catch (error) {
 				console.log(error);
 			}
 		};
+		fetchUserData();
 	}, []);
 	return (
 		<>
