@@ -16,7 +16,7 @@ export const createUser = async (userData: userObject) => {
 	return user;
 };
 
-// type and function for fetching user's password hash from the database
+// type and function for looking up a user with email
 type userCredentialsObjects = {
 	email: string;
 };
