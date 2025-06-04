@@ -27,3 +27,11 @@ export const authenticateUser = async (authData: userCredentialsObjects) => {
 	});
 	return user;
 };
+
+// function for find user by id
+export const findById = async (id: number) => {
+	const user = await prisma.user.findUnique({
+		where: { id: id },
+	});
+	return user;
+};
