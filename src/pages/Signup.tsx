@@ -52,22 +52,26 @@ function Signup() {
 
 	const formSubmit = async () => {
 		try {
-			const response = await fetch("http://localhost:3000/api/user", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					firstName: formData.firstName,
-					lastName: formData.lastName,
-					email: formData.email,
-					password: formData.password,
-					subscription: formData.subscriptionType,
-				}),
-			});
+			const response = await fetch(
+				"http://localhost:3000/api/user/create",
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						firstName: formData.firstName,
+						lastName: formData.lastName,
+						email: formData.email,
+						password: formData.password,
+						subscription: formData.subscriptionType,
+					}),
+				},
+			);
 			// redirects user to dashboard if user was succesfully created
 			if (response.ok) {
 				navigate("/dashboard", {
 					state: {
 						snackbarVisible: true,
+						snackbarSeverity: "success",
 						snackbarMessage: "Account created succesfully",
 					},
 				});
