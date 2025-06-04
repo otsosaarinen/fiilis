@@ -7,14 +7,19 @@ import type { SnackbarCloseReason } from "@mui/material";
 function Layout() {
 	let location = useLocation();
 	const [snackbarVisible, setSnackbarVisible] = useState(false);
-	const [snackbarMessage, setSnackbarMessage] = useState("");
+	const [snackbarSeverity, setSnackbarSeverity] = useState<
+		"success" | "error" | "info" | "warning"
+	>("success");
+	const [snackbarMessage, setSnackbarMessage] = useState(null);
 
 	useEffect(() => {
 		if (
 			location.state?.snackbarVisible &&
+			location.state?.snackbarSeverity &&
 			location.state?.snackbarMessage
 		) {
 			setSnackbarVisible(true);
+			setSnackbarSeverity(location.state.snackbarSeverity);
 			setSnackbarMessage(location.state.snackbarMessage);
 
 			// Clear state so it doesn't repeat on refresh
@@ -42,7 +47,7 @@ function Layout() {
 			>
 				<Alert
 					onClose={handleClose}
-					severity="success"
+					severity={snackbarSeverity}
 					variant="filled"
 				>
 					{snackbarMessage}
